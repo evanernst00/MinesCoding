@@ -1,0 +1,4 @@
+#ifndef STRINGFILTER_H
+#define STRINGFILTER_H
+
+#endif //STRINGFILTER.H

@@ -1,0 +1,1 @@
+Classes go inside of the header file, and the functions of the class go inside their corresponding cpp files

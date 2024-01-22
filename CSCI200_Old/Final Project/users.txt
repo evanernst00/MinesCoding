@@ -1,0 +1,5 @@
+john_doe john_doe:1234
+jane_doe jane_doe:abcd
+MrSprinkles MrSprinkles:sprinklespassword
+ZiboWang ZiboWang:CSCI200
+testtest testtest:yellow
