@@ -11,8 +11,11 @@
 #include <ctime>
 #include <cstdlib>
 #include <string> // For string class
+
+// We will (most of the time) use the standard library namespace in our programs.
 using namespace std;
 
+// Define any constants below this comment.
 const bool LIZARD_SPOCK = true; // Allow Lizard and Spock?
 
 int main()
