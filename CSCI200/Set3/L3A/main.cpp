@@ -24,7 +24,7 @@ int main()
 
     // Decipher message
     char currentChar;
-    while(secretMessage.eof())
+    while(!secretMessage.eof())
     {
         secretMessage >> currentChar;
         cout << "Reading current character: " << currentChar << endl;
