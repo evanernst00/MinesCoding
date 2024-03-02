@@ -1,6 +1,8 @@
 #include "string_functions.h"
 
 #include <iostream>
+#include <vector>
+#include <sstream>
 
 unsigned long string_length(const string STR)  {
     unsigned long result = -1;
@@ -9,113 +11,167 @@ unsigned long string_length(const string STR)  {
 }
 
 char string_char_at(const string STR, const int IDX) {
-    char result = '\0';
-    // TODO 01: set result to the character of a string at a given index
-    std::cout << "TODO: implement string_char_at(\"" << STR << "\", " << IDX << ")" << std::endl;
+    char result = STR.at(IDX);
     return result;
 }
 
 string string_append(const string LEFT, const string RIGHT)  {
-    string result = LEFT;
-    // TODO 02: set result to the concatenation of strings LEFT and RIGHT
-    std::cout << "TODO: implement string_append(\"" << LEFT << "\", \"" << RIGHT << "\")" << std::endl;
+    string result = LEFT + RIGHT;
     return result;
 }
 
 string string_insert(const string STR, const string TO_INSERT, const int IDX) {
-    string result = STR;
-    // TODO 03: set result to the result of inserting a string into another
-    std::cout << "TODO: implement string_insert(\"" << STR << "\", \"" << TO_INSERT << "\", " << IDX << ")" << std::endl;
+    string result = STR.substr(0, IDX) + TO_INSERT + STR.substr(IDX, STR.length());
     return result;
 }
 
 size_t string_find(const string STR, const char C)  {
-    size_t result = 0;
-    // TODO 04: set result to the index of the first occurrence of the character
-    std::cout << "TODO: implement string_find(\"" << STR << "\", '" << C << "')" << std::endl;
+    size_t result = STR.find(C);
     return result;
 }
 
 string string_substring(const string STR, const int IDX, const int LEN) {
-    string result = STR;
-    // TODO 05: set result to be a substring starting at index of given length
-    std::cout << "TODO: implement string_substring(\"" << STR << "\", " << IDX << ", " << LEN << ")" << std::endl;
+    string result = STR.substr(IDX, LEN);
     return result;
 }
 
 string string_replace(const string STR, const string TEXT_TO_REPLACE, const string REPLACE_WITH) {
     string result = STR;
-    // TODO 06: set result to be the string with the given text replaced
-    std::cout << "TODO: implement string_replace(\"" << STR << "\", \"" << TEXT_TO_REPLACE << "\", \"" << REPLACE_WITH << ")\"" << std::endl;
+    size_t pos;
+    // replace all instances of TEXT_TO_REPLACE with REPLACE_WITH
+    while ((pos = result.find(TEXT_TO_REPLACE)) != string::npos) {
+        result.replace(pos, TEXT_TO_REPLACE.length(), REPLACE_WITH);
+    }
+
     return result;
 }
 
 string string_first_word(const string STR)  {
-    string result = STR;
-    // TODO 07: set result to the first word from the string
-    std::cout << "TODO: implement string_first_word(\"" << STR << "\")" << std::endl;
+    string result = STR.substr(0, STR.find(' '));
     return result;
 }
 
 string string_remove_first_word(const string STR)  {
-    string result = STR;
-    // TODO 08: set result to be the string with the first word removed
-    std::cout << "TODO: implement string_remove_first_word(\"" << STR << ")\"" << std::endl;
-    return result;
+    size_t spaceIndex = STR.find(' ');
+    
+    if (spaceIndex == std::string::npos /*no spaces in string*/ || STR.empty()) {
+        return "";
+    }
+    
+    // If the space is the last character, also return an empty string
+    if (spaceIndex == STR.length() - 1) {
+        return "";
+    }
+    
+    // Return the substring starting from the character after the first space
+    return STR.substr(spaceIndex + 1);
 }
 
 string string_second_word(const string STR)  {
-    string result = STR;
-    // TODO 09: set result to be the second word from the string
-    std::cout << "TODO: implement string_second_word(\"" << STR << "\")" << std::endl;
-    return result;
+    // string result = STR;
+    // result = result.substr(result.find(' ') + 1); // remove first word
+    // result = result.substr(0, result.find(' '));
+    // return result;
+
+    std::istringstream stream(STR);
+    std::string word;
+
+    stream >> word; // first word
+
+    if (stream >> word) { // second word
+        return word;
+    }
+
+    // If there's no second word, return an empty string
+    return "";
 }
 
 string string_third_word(const string STR)  {
-    string result = STR;
-    // TODO 10: set result to be the third word from the string
-    std::cout << "TODO: implement string_third_word(\"" << STR << "\")" << std::endl;
-    return result;
+    // string result = STR;
+    // result = result.substr(result.find(' ') + 1); // remove first word first time
+    // result = result.substr(result.find(' ') + 1); // remove first word second time
+    // result = result.substr(0, result.find(' '));
+    // return result;
+
+    vector<std::string> words;
+    istringstream stream(STR);
+    string word;
+
+    while(stream >> word) {
+        words.push_back(word);
+    }
+
+    if(words.size() < 3) return "";
+    
+    return words.at(2);
 }
 
-string string_nth_word(const string STR, const int N)  {
-    string result = STR;
-    // TODO 11: set result to be the nth word from the string
-    std::cout << "TODO: implement string_nth_word(\"" << STR << "\", " << N << ")" << std::endl;
-    return result;
+string string_nth_word(const string STR, const int N) {
+    
+    vector<std::string> words;
+    istringstream stream(STR);
+    string word;
+
+    size_t n = static_cast<size_t>(N);
+
+    while(stream >> word) {
+        words.push_back(word);
+    }
+    
+    if (n > 0 && n <= words.size()) return words[N-1];
+    return "";
 }
 
-vector<string> string_tokenize(const string STR, const char DELIMINATOR) {
+vector<string> string_tokenize(const string STR, const char DELIMITER) {
     vector<string> result;
-    // TODO 12: split the string by the given deliminator
-    std::cout << "TODO: implement string_tokenize(\"" << STR << "\", '" << DELIMINATOR << "')" << std::endl;
+    istringstream stream(STR);
+    string token;
+
+    if(STR.empty()) return {""};
+
+    while(getline(stream, token, DELIMITER)) {
+        if(!token.empty()) {
+            result.push_back(token);
+        }
+    }
+
     return result;
 }
 
 string string_substitute(const string STR, const char TARGET, const char REPLACEMENT)  {
     string result = STR;
-    // TODO 13: set result to be the string with all instances of TARGET replaced
-    std::cout << "TODO: implement string_substitute(\"" << STR << "\", '" << TARGET << "', '" << REPLACEMENT << "')" << std::endl;
+    // Iterate over each character and replace if it matches TARGET
+    for (char& ch : result) {
+        if (ch == TARGET) {
+            ch = REPLACEMENT;
+        }
+    }
     return result;
 }
 
 string string_to_lower(const string STR) {
+
     string result = STR;
-    // TODO 14: convert all characters to lower case
-    std::cout << "TODO: implement string_to_lower(\"" << STR << "\")" << std::endl;
+
+    for(size_t i = 0; i < result.length(); i++) {
+        result.at(i) = tolower(result[i]);
+    }
+
     return result;
 }
 
 string string_to_upper(const string STR) {
     string result = STR;
-    // TODO 15: convert all characters to upper case
-    std::cout << "TODO: implement string_to_upper(\"" << STR << "\")" << std::endl;
+
+    for(size_t i = 0; i < result.length(); i++) {
+        result.at(i) = toupper(result[i]);
+    }
+
     return result;
 }
 
 int string_compare(const string LHS, const string RHS) {
-    int result = 0;
-    // TODO 16: compare LHS and RHS
-    std::cout << "TODO: implement string_compare(\"" << LHS << "\", \"" << RHS << "\")" << std::endl;
-    return result;
+    if(LHS.compare(RHS) == 0) return 0;
+    else if(LHS.compare(RHS) < 0) return -1;
+    else return 1;
 }
