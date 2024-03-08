@@ -7,9 +7,9 @@
 class StringCounter
 {
 private:
-    std::vector<std::string> allWords;
-    std::vector<unsigned int> letterCounts;
-    unsigned int totalLetterCount;
+    std::vector<std::string> _allWords;
+    std::vector<unsigned int> _letterCounts;
+    unsigned int _totalLetterCount;
 public:
     StringCounter();
     void readAllWords( std::istream&, std::string );

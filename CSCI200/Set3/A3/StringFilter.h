@@ -1,12 +1,16 @@
 #ifndef STRINGFILTER_H
 #define STRINGFILTER_H
 
+#include <vector>
+#include <string>
+#include <fstream>
+
 class StringFilter
 {
 private:
-    std::vector<std::string> uniqueWords;
-    std::vector<unsigned int> wordCounts;
-    unsigned int totalWordCount;
+    std::vector<std::string> _uniqueWords;
+    std::vector<unsigned int> _wordCounts;
+    unsigned int _totalWordCount;
 public:
     StringFilter();
     void addWords( std::vector<std::string> );
