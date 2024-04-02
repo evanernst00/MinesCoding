@@ -1,4 +1,4 @@
-#include "Warehouse.h"
+#include "Warehouse.hpp"
 
 #include <iostream>
 #include <string>
