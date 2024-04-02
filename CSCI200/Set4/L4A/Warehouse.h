@@ -20,6 +20,16 @@ public:
      */
     Warehouse();
     /**
+     * @brief Deconstruct the Warehouse object
+     * 
+     */
+    ~Warehouse();
+    /**
+     * @brief Copy constructor
+     * @param OTHER pass by reference a Warehouse to deep copy
+     */
+    Warehouse(const Warehouse& OTHER);
+    /**
      * @brief puts the item into a Box of given size
      * @param SIZE size of the cube shaped box to store
      */
@@ -36,6 +46,14 @@ public:
      * @return int 
      */
     int getNumberOfBoxes() const;
+
+    /**
+     * @brief Copy assignment operator
+     * 
+     * @param OTHER 
+     * @return Warehouse& Warehouse to copy
+     */
+    Warehouse& operator=(const Warehouse& OTHER);
 private:
     /**
      * @brief holds a list of pointers to Boxes
