@@ -4,6 +4,8 @@ using namespace sf;
 #include <iostream>
 using namespace std;
 
+#include "./Bubble.hpp"
+
 int main() {
     // create a window
     RenderWindow window( VideoMode(640, 640), "SFML Test" );
@@ -16,6 +18,8 @@ int main() {
     //  END  ANY FILE LOADING
     /////////////////////////////////////
 
+    Bubble bubble;
+
     // create an event object once to store future events
     Event event;
 
@@ -27,7 +31,7 @@ int main() {
         /////////////////////////////////////
         // BEGIN DRAWING HERE
 
-        // place any draw commands here to display in the window
+        bubble.draw(window);
 
         //  END  DRAWING HERE
         /////////////////////////////////////
