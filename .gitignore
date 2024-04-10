@@ -2,5 +2,8 @@
 CSCI200_Old/.DS_Store
 CSCI200/Set1/.DS_Store
 CSCI200/.DS_Store
-.DS_Store
+*.DS_Store
+/**/*.DS_Store
+CSCI303/.DS_Store
+CSCI200_Old/Set3/.DS_Store
 CSCI303/.DS_Store
