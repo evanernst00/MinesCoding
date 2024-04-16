@@ -3,10 +3,12 @@
 
 #include "Room.h"
 
-class ExitRoom {
+class ExitRoom : public ARoom {
 public:
     ExitRoom();
     ~ExitRoom();
+
+    bool escapeTheRoom();
 };
 
 #endif//EXIT_ROOM_H

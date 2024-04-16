@@ -10,3 +10,8 @@ ExitRoom::ExitRoom() {
 ExitRoom::~ExitRoom() {
     cout << "~ExitRoom() called" << endl;
 }
+
+bool ExitRoom::escapeTheRoom() {
+    cout << "You've escaped!" << endl;
+    return true;
+}
