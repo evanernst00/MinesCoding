@@ -4,9 +4,9 @@
 struct Coordinate
 {
     Coordinate();
-    Coordinate(int x, int y);
-    int x;
-    int y;
+    Coordinate(double x, double y);
+    double x;
+    double y;
 };
 
 Coordinate::Coordinate()
@@ -15,7 +15,7 @@ Coordinate::Coordinate()
     y = 0;
 }
 
-Coordinate::Coordinate(int x, int y)
+Coordinate::Coordinate(double x, double y)
 {
     this->x = x;
     this->y = y;

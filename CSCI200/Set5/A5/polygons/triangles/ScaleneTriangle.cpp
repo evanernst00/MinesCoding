@@ -1,8 +1,5 @@
-#include <SFML/Graphics.hpp>
-
 #include "./ScaleneTriangle.h"
 
-using namespace sf;
 using namespace std;
 
 bool ScaleneTriangle::validate()

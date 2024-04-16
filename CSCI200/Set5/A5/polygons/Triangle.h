@@ -1,12 +1,12 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include <SFML/Graphics.hpp>
 #include "../Coordinate.hpp"
 #include "../Polygon.h"
 
 class Triangle : public Polygon
 {
+public:
     /**
      * @brief Sets the number of vertices to be three and allocates the vertex array to hold three coordinates
      * 

@@ -1,8 +1,5 @@
-#include <SFML/Graphics.hpp>
-
 #include "./IsoscelesTriangle.h"
 
-using namespace sf;
 using namespace std;
 
 bool IsoscelesTriangle::validate()

@@ -1,8 +1,5 @@
-#include <SFML/Graphics.hpp>
-
 #include "./EquilateralTriangle.h"
 
-using namespace sf;
 using namespace std;
 
 bool EquilateralTriangle::validate()

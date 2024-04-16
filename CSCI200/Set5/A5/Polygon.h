@@ -18,13 +18,6 @@ public:
      * 
      */
     virtual ~Polygon();
-    
-    /**
-     * @brief Sets the private color data member
-     * 
-     * @param color 
-     */
-    void setColor(const sf::Color color);
 
     /**
      * @brief Creates a ConvexShape, sets the points for each coordinate, sets the fill color, draws it to the provided window
@@ -32,6 +25,14 @@ public:
      * @param window 
      */
     void draw(sf::RenderTarget& window);
+
+    /**
+     * @brief Returns true if the set coordinates form the intended polygon
+     * 
+     * @return true 
+     * @return false 
+     */
+    virtual bool validate() = 0;
 
     /**
      * @brief Sets the corresponding coordinate in the vertices array
@@ -42,12 +43,15 @@ public:
     void setCoordinate(int idx, Coordinate coord);
 
     /**
-     * @brief Returns true if the set coordinates form the intended polygon
+     * @brief Sets the private color data member
      * 
-     * @return true 
-     * @return false 
+     * @param color 
      */
-    virtual bool validate() = 0;
+    void setColor(const sf::Color color);
+
+    Coordinate getCoordinate(int idx) const;
+
+    sf::Color getColor() const;
 
 protected:
     short int _numVertices;
