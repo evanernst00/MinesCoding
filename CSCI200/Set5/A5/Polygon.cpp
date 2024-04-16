@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
-using namespace sf;
 
 #include "Polygon.h"
 
+using namespace sf;
 using namespace std;
 
 Polygon::Polygon()

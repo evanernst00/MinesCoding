@@ -2,8 +2,8 @@
 #define TRIANGLE_H
 
 #include <SFML/Graphics.hpp>
-
-#include "Polygon.h"
+#include "../Coordinate.hpp"
+#include "../Polygon.h"
 
 class Triangle : public Polygon
 {

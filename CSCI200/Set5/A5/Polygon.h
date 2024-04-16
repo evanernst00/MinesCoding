@@ -2,6 +2,7 @@
 #define POLYGON_H
 
 #include <SFML/Graphics.hpp>
+#include "Coordinate.hpp"
 
 class Polygon
 {
