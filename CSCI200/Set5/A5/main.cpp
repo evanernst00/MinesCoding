@@ -27,6 +27,7 @@ int main()
 
         window.display();
 
+        // Event handling
         while( window.pollEvent(event) ) 
         {
             if(event.type == Event::Closed) 
