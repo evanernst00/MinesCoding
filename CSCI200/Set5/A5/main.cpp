@@ -69,6 +69,7 @@ int main()
 
         if(!polygons.back()->validate())
         {
+            sf::Color tempColor = polygons.back()->getColor();
             cout << "Polygon is invalid - " 
             << fileReader << " " // I, E, S, R (Polygon type)
             << polygons.back()->getCoordinate(0).x << " " // Coordinates
@@ -77,45 +78,50 @@ int main()
             << polygons.back()->getCoordinate(1).y << " " 
             << polygons.back()->getCoordinate(2).x << " " 
             << polygons.back()->getCoordinate(2).y << " "
-            << polygons.back()->getColor().r << " " // Color
-            << polygons.back()->getColor().g << " "
-            << polygons.back()->getColor().b << endl;
+            << (short int)tempColor.r << " " // Color
+            << (short int)tempColor.g << " "
+            << (short int)tempColor.b << endl;
+
+            polygons.pop_back();
         }
     }
 
     polygonData.close();
 
-    // RenderWindow window( VideoMode(640, 640), "Polygon Land" );
+    RenderWindow window( VideoMode(640, 640), "Polygon Land" );
 
-    // Event event;
-
-
-    // while( window.isOpen() ) 
-    // {
-    //     window.clear();
-
-    //     /////////////////////////////////////
-    //     // BEGIN DRAWING HERE
+    Event event;
 
 
+    while( window.isOpen() ) 
+    {
+        window.clear();
 
-    //     //  END  DRAWING HERE
-    //     /////////////////////////////////////
+        /////////////////////////////////////
+        // BEGIN DRAWING HERE
+
+        for(auto& p : polygons)
+        {
+            p->draw(window);
+        }
+
+        //  END  DRAWING HERE
+        /////////////////////////////////////
 
 
 
-    //     window.display();
+        window.display();
 
-    //     // Event handling
-    //     while( window.pollEvent(event) ) 
-    //     {
-    //         if(event.type == Event::Closed) 
-    //         {
+        // Event handling
+        while( window.pollEvent(event) ) 
+        {
+            if(event.type == Event::Closed) 
+            {
 
-    //             window.close();
-    //         }
-    //     }
-    // }
+                window.close();
+            }
+        }
+    }
 
-    // return 0;
+    return 0;
 }

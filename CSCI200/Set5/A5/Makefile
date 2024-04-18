@@ -1,7 +1,7 @@
 # THE NAME OF YOUR EXECUTABLE
 TARGET = A5
 # ALL CPP COMPILABLE IMPLEMENTATION FILES THAT MAKE UP THE PROJECT
-SRC_FILES = main.cpp Polygon.cpp polygons/Triangle.cpp polygons/Quadrilateral.cpp polygons/triangles/IsoscelesTriangle.cpp polygons/triangles/EquilateralTriangle.cpp polygons/triangles/ScaleneTriangle.cpp polygons/quadrilaterals/Rhombus.cpp
+SRC_FILES = main.cpp Coordinate.cpp Polygon.cpp polygons/Triangle.cpp polygons/Quadrilateral.cpp polygons/triangles/IsoscelesTriangle.cpp polygons/triangles/EquilateralTriangle.cpp polygons/triangles/ScaleneTriangle.cpp polygons/quadrilaterals/Rhombus.cpp
 
 # NO EDITS NEEDED BELOW THIS LINE
 
@@ -159,6 +159,7 @@ main.o: main.cpp /usr/local/include/SFML/Graphics.hpp \
   polygons/quadrilaterals/../../Coordinate.hpp \
   polygons/quadrilaterals/../../Polygon.h \
   polygons/quadrilaterals/../Quadrilateral.h
+Coordinate.o: Coordinate.cpp Coordinate.hpp
 Polygon.o: Polygon.cpp /usr/local/include/SFML/Graphics.hpp \
   /usr/local/include/SFML/Window.hpp /usr/local/include/SFML/System.hpp \
   /usr/local/include/SFML/Config.hpp \

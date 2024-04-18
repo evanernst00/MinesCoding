@@ -9,16 +9,4 @@ struct Coordinate
     double y;
 };
 
-Coordinate::Coordinate()
-{
-    x = 0;
-    y = 0;
-}
-
-Coordinate::Coordinate(double x, double y)
-{
-    this->x = x;
-    this->y = y;
-}
-
 #endif // COORDINATE_HPP

@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "Polygon.h"
+#include "./Polygon.h"
 
 using namespace sf;
 using namespace std;
