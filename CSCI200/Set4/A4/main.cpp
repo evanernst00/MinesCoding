@@ -8,7 +8,7 @@ using namespace std;
 #include <cstdlib>
 #include <ctime>
 
-#include "./Bubble.hpp"
+#include "./Bubble.h"
 
 
 int main() {
