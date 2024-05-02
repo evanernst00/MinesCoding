@@ -3,14 +3,51 @@ using namespace sf;
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 using namespace std;
+
+int rows;
+int cols;
+
+const int scale = 40;
 
 int main()
 {
+    /*------ File Input ------*/
+    ifstream mazeFile("./mazePack/1.maze");
+    if(mazeFile.fail())
+    {
+        cerr << "Failed to open file";
+        return -1;
+    }
 
-    RenderWindow window(VideoMode(640, 640), "SFML Test");
+    mazeFile >> rows;
+    mazeFile >> cols;
 
-    // handle files
+    vector<vector<char>> maze(rows, vector<char>(cols));
+
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < cols; j++)
+        {
+            mazeFile >> maze[i][j];
+    
+        }
+    }
+
+    /*-------------*/
+
+    // Print maze
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < cols; j++)
+        {
+            cout << maze[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    RenderWindow window(VideoMode(cols*scale, rows*scale), "SFML Test");
 
     Event event;
 
@@ -19,6 +56,33 @@ int main()
         window.clear();
 
         // draw stuff
+        for(int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < cols; j++)
+            {
+                RectangleShape rect(Vector2f(scale, scale));
+                rect.setPosition(j * scale, i * scale);
+                switch(maze[i][j])
+                {
+                    case '#':
+                        rect.setFillColor(Color::Black);
+                        break;
+                    case '.':
+                        rect.setFillColor(Color::White);
+                        break;
+                    case 'S':
+                        rect.setFillColor(Color::Green);
+                        break;
+                    case 'E':
+                        rect.setFillColor(Color::Red);
+                        break;
+                    default:
+                        rect.setFillColor(Color::Black);
+                        break;
+                }
+                window.draw(rect);
+            }
+        }
 
         window.display();
         while (window.pollEvent(event))
