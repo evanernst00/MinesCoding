@@ -13,8 +13,12 @@ const int scale = 40;
 
 int main()
 {
+    string mazeInput = "1.maze";
+    cout << "Enter the file name of the maze you would like to view: ";
+    cin >> mazeInput;
+
     /*------ File Input ------*/
-    ifstream mazeFile("./mazePack/1.maze");
+    ifstream mazeFile("./mazePack/" + mazeInput);
     if(mazeFile.fail())
     {
         cerr << "Failed to open file";

@@ -13,8 +13,27 @@ const int scale = 40;
 
 int main()
 {
-    /*------ File Input ------*/
-    ifstream mazeFile("./mazePack/1.maze");
+    // Select maze
+    string mazeInput = "1.maze";
+    cout << "Enter the file name of the maze you would like to view (1.maze, 2.maze, etc.): ";
+    cin >> mazeInput;
+
+    // Select search method
+    int searchMethod;
+    cout << "Enter the search method you would like to use: \n1. Depth First Search \n2. Breadth First Search";
+    while(true)
+    {
+        cin >> searchMethod;
+        if(searchMethod == 1 || searchMethod == 2)
+        {
+            break;
+        }
+        cout << "Invalid search method. Please enter 1 or 2: ";
+    }
+
+    /////////////////////////////////////
+    // FILE INPUT
+    ifstream mazeFile("./mazePack/" + mazeInput);
     if(mazeFile.fail())
     {
         cerr << "Failed to open file";
@@ -34,8 +53,8 @@ int main()
     
         }
     }
-
-    /*-------------*/
+    // END FILE INPUT
+    /////////////////////////////////////
 
     // Print maze
     for(int i = 0; i < rows; i++)
@@ -47,6 +66,9 @@ int main()
         cout << endl;
     }
 
+    /////////////////////////////////////
+    // SFML
+
     RenderWindow window(VideoMode(cols*scale, rows*scale), "SFML Test");
 
     Event event;
@@ -55,7 +77,10 @@ int main()
     {
         window.clear();
 
-        // draw stuff
+        /////////////////////////////////////
+        // DRAW MAZE
+
+        // Iterate through 2D maze vector and draw rectangles for each cell
         for(int i = 0; i < rows; i++)
         {
             for(int j = 0; j < cols; j++)
@@ -84,6 +109,26 @@ int main()
             }
         }
 
+        //  END DRAWING MAZE
+        /////////////////////////////////////
+
+        /////////////////////////////////////
+        // SEARCH ALGORITHM
+
+        if(searchMethod == 1)
+        {
+            // Depth First Search
+        }
+        else
+        {
+            // Breadth First Search
+        }
+
+        // END SEARCH ALGORITHM
+        /////////////////////////////////////
+
+
+
         window.display();
         while (window.pollEvent(event))
         {
@@ -93,6 +138,8 @@ int main()
             }
         }
     }
+    // SFML END
+    /////////////////////////////////////
 
     return 0;
 }
