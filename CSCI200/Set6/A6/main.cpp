@@ -2,14 +2,16 @@
 using namespace sf;
 
 #include <iostream>
-#include <fstream>
+#include <string>
 #include <vector>
+#include <fstream>
+#include <queue>
+#include <stack>
 using namespace std;
 
-int rows;
-int cols;
+#include "Maze.h"
 
-const int scale = 40;
+int scale = 40;
 
 int main()
 {
@@ -18,116 +20,48 @@ int main()
     cout << "Enter the file name of the maze you would like to view (1.maze, 2.maze, etc.): ";
     cin >> mazeInput;
 
-    // Select search method
+    // Make life easier
     int searchMethod;
-    cout << "Enter the search method you would like to use: \n1. Depth First Search \n2. Breadth First Search";
-    while(true)
+    if (mazeInput == "auto")
     {
-        cin >> searchMethod;
-        if(searchMethod == 1 || searchMethod == 2)
-        {
-            break;
-        }
-        cout << "Invalid search method. Please enter 1 or 2: ";
+        searchMethod = 1;
+        mazeInput = "3.maze";
     }
-
-    /////////////////////////////////////
-    // FILE INPUT
-    ifstream mazeFile("./mazePack/" + mazeInput);
-    if(mazeFile.fail())
+    else
     {
-        cerr << "Failed to open file";
-        return -1;
-    }
-
-    mazeFile >> rows;
-    mazeFile >> cols;
-
-    vector<vector<char>> maze(rows, vector<char>(cols));
-
-    for(int i = 0; i < rows; i++)
-    {
-        for(int j = 0; j < cols; j++)
+        cout << "Enter the search method you would like to use: \n1. Depth First Search \n2. Breadth First Search\n";
+        while (true)
         {
-            mazeFile >> maze[i][j];
-    
+            cin >> searchMethod;
+            if (searchMethod == 1 || searchMethod == 2)
+            {
+                break;
+            }
+            cout << "Invalid search method. Please enter 1 or 2: ";
         }
     }
-    // END FILE INPUT
-    /////////////////////////////////////
 
-    // Print maze
-    for(int i = 0; i < rows; i++)
-    {
-        for(int j = 0; j < cols; j++)
-        {
-            cout << maze[i][j] << " ";
-        }
-        cout << endl;
-    }
+    Maze maze(scale);
+    maze.loadMaze(mazeInput);
+    maze.printMaze();
 
-    /////////////////////////////////////
-    // SFML
+    ///////////////////////////////////// SFML /////////////////////////////////////
 
-    RenderWindow window(VideoMode(cols*scale, rows*scale), "SFML Test");
-
+    // Create window scaled to size of maze
+    RenderWindow window(VideoMode(maze.getCols() * maze.scale, maze.getRows() * maze.scale), "SFML Test");
     Event event;
 
     while (window.isOpen())
     {
+        sleep(milliseconds(50));
+
         window.clear();
 
-        /////////////////////////////////////
-        // DRAW MAZE
+        if(searchMethod == 1) maze.stepDepthFirstSearch();
+        else if(searchMethod == 2) maze.stepBreadthFirstSearch();
 
-        // Iterate through 2D maze vector and draw rectangles for each cell
-        for(int i = 0; i < rows; i++)
-        {
-            for(int j = 0; j < cols; j++)
-            {
-                RectangleShape rect(Vector2f(scale, scale));
-                rect.setPosition(j * scale, i * scale);
-                switch(maze[i][j])
-                {
-                    case '#':
-                        rect.setFillColor(Color::Black);
-                        break;
-                    case '.':
-                        rect.setFillColor(Color::White);
-                        break;
-                    case 'S':
-                        rect.setFillColor(Color::Green);
-                        break;
-                    case 'E':
-                        rect.setFillColor(Color::Red);
-                        break;
-                    default:
-                        rect.setFillColor(Color::Black);
-                        break;
-                }
-                window.draw(rect);
-            }
-        }
-
-        //  END DRAWING MAZE
-        /////////////////////////////////////
-
-        /////////////////////////////////////
-        // SEARCH ALGORITHM
-
-        if(searchMethod == 1)
-        {
-            // Depth First Search
-        }
-        else
-        {
-            // Breadth First Search
-        }
-
-        // END SEARCH ALGORITHM
-        /////////////////////////////////////
-
-
+        // Draw maze
+        maze.drawMaze(window);
 
         window.display();
         while (window.pollEvent(event))
@@ -136,10 +70,12 @@ int main()
             {
                 window.close();
             }
+            else if(Keyboard::isKeyPressed(sf::Keyboard::Escape) || Keyboard::isKeyPressed(sf::Keyboard::Q))
+            {
+                window.close();
+            }
         }
     }
-    // SFML END
-    /////////////////////////////////////
 
     return 0;
 }
